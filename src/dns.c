@@ -40,7 +40,7 @@
 
 #include <limits.h>		/* INT_MAX */
 #include <stddef.h>		/* offsetof() */
-#ifdef _WIN32
+#if defined(_WIN32) && !defined(__MINGW32__)
 #define uint32_t unsigned int
 #else
 #include <stdint.h>		/* uint32_t */
@@ -62,6 +62,9 @@
 #endif
 #include <winsock2.h>
 #include <ws2tcpip.h>
+#ifdef __MINGW32__
+#define AI_NUMERICSERV            0x0008
+#endif
 #else
 #include <sys/types.h>		/* FD_SETSIZE socklen_t */
 #include <sys/select.h>		/* FD_ZERO FD_SET fd_set select(2) */
